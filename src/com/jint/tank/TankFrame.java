@@ -5,14 +5,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by jint on 2020/7/19.
  */
 public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
-    private static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    List<Bullet> bullets = new ArrayList<>();
+    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     public TankFrame() {
         setSize(800, 600);
@@ -47,8 +49,11 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        g.drawString("子弹数量：" + bullets.size(), 10, 60);
         myTank.paint(g);
-        bullet.paint(g);
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(g);
+        }
     }
 
     class MyKeyListener extends KeyAdapter {
