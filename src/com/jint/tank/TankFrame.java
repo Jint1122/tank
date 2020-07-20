@@ -10,7 +10,8 @@ import java.awt.event.WindowEvent;
  * Created by jint on 2020/7/19.
  */
 public class TankFrame extends Frame {
-    int x = 200, y = 200;
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
 
     public TankFrame() {
         setSize(800, 600);
@@ -30,7 +31,8 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        g.fillRect(x, y, 50, 50);
+        myTank.paint(g);
+        bullet.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -48,18 +50,19 @@ public class TankFrame extends Frame {
                     BL = true;
                     break;
                 case KeyEvent.VK_UP:
-                    BL = true;
+                    BU = true;
                     break;
                 case KeyEvent.VK_RIGHT:
-                    BL = true;
+                    BR = true;
                     break;
                 case KeyEvent.VK_DOWN:
-                    BL = true;
+                    BD = true;
                     break;
                 default:
                     break;
             }
-            repaint();
+
+            setMainTankDir();
         }
 
         @Override
@@ -70,16 +73,38 @@ public class TankFrame extends Frame {
                     BL = false;
                     break;
                 case KeyEvent.VK_UP:
-                    BL = false;
+                    BU = false;
                     break;
                 case KeyEvent.VK_RIGHT:
-                    BL = false;
+                    BR = false;
                     break;
                 case KeyEvent.VK_DOWN:
-                    BL = false;
+                    BD = false;
                     break;
                 default:
                     break;
+            }
+
+            setMainTankDir();
+        }
+
+        private void setMainTankDir() {
+            if (!BL && !BU && !BR && !BD) {
+                myTank.setMoving(false);
+            } else {
+                myTank.setMoving(true);
+                if (BL) {
+                    myTank.setDir(Dir.LEFT);
+                }
+                if (BU) {
+                    myTank.setDir(Dir.UP);
+                }
+                if (BR) {
+                    myTank.setDir(Dir.RIGHT);
+                }
+                if (BD) {
+                    myTank.setDir(Dir.DOWN);
+                }
             }
         }
     }
