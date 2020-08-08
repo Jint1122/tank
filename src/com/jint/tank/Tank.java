@@ -12,7 +12,7 @@ public class Tank {
     private Dir dir;
     private boolean moving = true;
     private TankFrame tankFrame;
-    private static final int SPEED = 1;
+    private static final int SPEED = 2;
     public static final int WIDTH = ResourceMgr.tankD.getWidth();
     public static final int HEIGHT = ResourceMgr.tankD.getHeight();
 
@@ -98,29 +98,37 @@ public class Tank {
         }
         switch (dir) {
             case LEFT:
-                x -= SPEED;
+                x -=  SPEED;
                 break;
             case UP:
-                y -= SPEED;
+                y -=  SPEED;
                 break;
             case RIGHT:
-                x += SPEED;
+                x +=  SPEED;
                 break;
             case DOWN:
-                y += SPEED;
+                y +=  SPEED;
                 break;
             default:
                 break;
         }
-        if (random.nextInt(10) > 8) {
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
+            randomDir();
+        }
+
+    }
+
+    private void randomDir() {
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public void fire() {
-        int bx = x + Tank.WIDTH /2 - Bullet.WIDTH /2;
-        int by = y + Tank.HEIGHT /2 - Bullet.HEIGHT /2;
-        tankFrame.bullets.add(new Bullet(bx, by, this.dir, this.getGroup(), this.tankFrame));
+        int bX = x + Tank.WIDTH /2 - Bullet.WIDTH /2;
+        int bY = y + Tank.HEIGHT /2 - Bullet.HEIGHT /2;
+        tankFrame.bullets.add(new Bullet(bX, bY, this.dir, this.getGroup(), this.tankFrame));
     }
 
     public void die() {
