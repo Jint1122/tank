@@ -16,6 +16,7 @@ public class TankFrame extends Frame {
     List<Bullet> bullets = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    Explode e = new Explode(100, 100, this);
 
     public TankFrame() {
         setSize(800, 600);
@@ -64,6 +65,7 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
+        e.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
