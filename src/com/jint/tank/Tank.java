@@ -12,13 +12,14 @@ public class Tank {
     private Dir dir;
     private boolean moving = true;
     private TankFrame tankFrame;
-    private static final int SPEED = 2;
+    private static final int SPEED = 3;
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
 
     private boolean living = true;
     private Group group = Group.BAD;
     private Random random = new Random();
+    Rectangle rect = new Rectangle();
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
@@ -26,6 +27,11 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public int getX() {
@@ -112,6 +118,7 @@ public class Tank {
             default:
                 break;
         }
+
         if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
@@ -121,14 +128,17 @@ public class Tank {
 
         boundsCheck();
 
+        rect.x = this.x;
+        rect.y = this.y;
+
     }
 
     private void boundsCheck() {
-        if (this.x < 2) {
-            this.x = 2;
+        if (this.x < 0) {
+            this.x = 0;
         }
-        if (this.y < 28) {
-            this.y = 28;
+        if (this.y < 30) {
+            this.y = 30;
         }
         if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH) {
             this.x = TankFrame.GAME_WIDTH - Tank.WIDTH;
