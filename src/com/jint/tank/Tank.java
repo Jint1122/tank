@@ -1,6 +1,7 @@
 package com.jint.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by jint on 2020/7/20.
@@ -9,18 +10,21 @@ public class Tank {
     private int x;
     private int y;
     private Dir dir;
-    private boolean moving;
+    private boolean moving = true;
     private TankFrame tankFrame;
-    private static final int SPEED = 5;
+    private static final int SPEED = 1;
     public static final int WIDTH = ResourceMgr.tankD.getWidth();
     public static final int HEIGHT = ResourceMgr.tankD.getHeight();
 
     private boolean living = true;
+    private Group group = Group.BAD;
+    private Random random = new Random();
 
-    public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
@@ -54,6 +58,14 @@ public class Tank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -100,12 +112,15 @@ public class Tank {
             default:
                 break;
         }
+        if (random.nextInt(10) > 8) {
+            this.fire();
+        }
     }
 
     public void fire() {
         int bx = x + Tank.WIDTH /2 - Bullet.WIDTH /2;
         int by = y + Tank.HEIGHT /2 - Bullet.HEIGHT /2;
-        tankFrame.bullets.add(new Bullet(bx, by, this.dir, this.tankFrame));
+        tankFrame.bullets.add(new Bullet(bx, by, this.dir, this.getGroup(), this.tankFrame));
     }
 
     public void die() {
