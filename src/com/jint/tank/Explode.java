@@ -17,6 +17,7 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tankFrame = tankFrame;
+//        new Audio("audio/explode.wav").loop();
     }
 
     public int getX() {
