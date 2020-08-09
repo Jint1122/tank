@@ -7,21 +7,23 @@ import java.util.Properties;
  * Created by jint on 2020/8/8.
  */
 public class PropertyMgr {
-    static Properties prop = new Properties();
+    private static final Properties PROP = new Properties();
 
     static {
         try {
-            prop.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
+            PROP.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private PropertyMgr() {}
+
     public static Object get(String key) {
-        if (prop == null) {
+        if (PROP == null) {
             return null;
         }
-        return prop.get(key);
+        return PROP.get(key);
     }
 
     public static void main(String[] args) {

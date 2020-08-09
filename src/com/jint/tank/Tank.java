@@ -21,6 +21,8 @@ public class Tank {
     private Random random = new Random();
     Rectangle rect = new Rectangle();
 
+    FireStrategy fireStrategy = new DefaultFireStrategy();
+
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
@@ -32,6 +34,22 @@ public class Tank {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        String fileName;
+        try {
+            if (group == Group.GOOD) {
+                fileName = (String) PropertyMgr.get("goodFS");
+            } else {
+                fileName = (String) PropertyMgr.get("badFS");
+            }
+            fireStrategy = (FireStrategy) Class.forName(fileName).newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getX() {
@@ -72,6 +90,14 @@ public class Tank {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public TankFrame getTankFrame() {
+        return tankFrame;
+    }
+
+    public void setTankFrame(TankFrame tankFrame) {
+        this.tankFrame = tankFrame;
     }
 
     public void paint(Graphics g) {
@@ -153,9 +179,7 @@ public class Tank {
     }
 
     public void fire() {
-        int bX = x + Tank.WIDTH /2 - Bullet.WIDTH /2;
-        int bY = y + Tank.HEIGHT /2 - Bullet.HEIGHT /2;
-        tankFrame.bullets.add(new Bullet(bX, bY, this.dir, this.getGroup(), this.tankFrame));
+        fireStrategy.fire(this);
     }
 
     public void die() {

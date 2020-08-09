@@ -30,6 +30,16 @@ public class Bullet {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        tf.bullets.add(this);
+    }
+
+    public Dir getDir() {
+        return dir;
+    }
+
+    public void setDir(Dir dir) {
+        this.dir = dir;
     }
 
     public Group getGroup() {
@@ -38,6 +48,14 @@ public class Bullet {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
     }
 
     public void paint(Graphics g) {
