@@ -1,13 +1,14 @@
-package com.jint.tank;
+package com.jint.tank.abstractfactory;
 
-import com.jint.tank.abstractfactory.BaseExplode;
+import com.jint.tank.ResourceMgr;
+import com.jint.tank.TankFrame;
 
 import java.awt.*;
 
 /**
- * Created by jint on 2020/7/20.
+ * Created by jint on 2020/8/9.
  */
-public class Explode extends BaseExplode {
+public class RectExplode extends BaseExplode {
     private int x;
     private int y;
     private TankFrame tankFrame;
@@ -15,7 +16,7 @@ public class Explode extends BaseExplode {
     public static final int HEIGHT = ResourceMgr.explods[0].getHeight();
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tankFrame) {
+    public RectExplode(int x, int y, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.tankFrame = tankFrame;
@@ -40,10 +41,13 @@ public class Explode extends BaseExplode {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(ResourceMgr.explods[step++], x, y, null);
-        if (step >= ResourceMgr.explods.length) {
+        Color c = g.getColor();
+        g.setColor(Color.RED);
+        g.fillRect(x, y, 10 * step, 10 * step);
+        step++;
+        if (step >= 8) {
             tankFrame.explodes.remove(this);
         }
+        g.setColor(c);
     }
-
 }

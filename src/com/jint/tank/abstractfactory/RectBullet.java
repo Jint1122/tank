@@ -1,13 +1,13 @@
-package com.jint.tank;
+package com.jint.tank.abstractfactory;
 
-import com.jint.tank.abstractfactory.BaseBullet;
+import com.jint.tank.*;
 
 import java.awt.*;
 
 /**
- * Created by jint on 2020/7/20.
+ * Created by jint on 2020/8/9.
  */
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet{
     private static final int SPEED = 10;
 
     private int x;
@@ -21,7 +21,7 @@ public class Bullet extends BaseBullet {
 
     Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -60,26 +60,15 @@ public class Bullet extends BaseBullet {
         this.tf = tf;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             tf.bullets.remove(this);
         }
-        switch (dir) {
-            case LEFT:
-                g.drawImage(ResourceMgr.bulletL, x, y, null);
-                break;
-            case UP:
-                g.drawImage(ResourceMgr.bulletU, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(ResourceMgr.bulletR, x, y, null);
-                break;
-            case DOWN:
-                g.drawImage(ResourceMgr.bulletD, x, y, null);
-                break;
-            default:
-                break;
-        }
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
+        g.fillRect(x, y, 20, 20);
+        g.setColor(c);
         move();
     }
 
@@ -108,6 +97,7 @@ public class Bullet extends BaseBullet {
         }
     }
 
+    @Override
     public void collideWith(Tank tank) {
         if (this.group == tank.getGroup()) {
             return;

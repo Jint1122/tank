@@ -1,12 +1,14 @@
 package com.jint.tank;
 
+import com.jint.tank.abstractfactory.BaseTank;
+
 import java.awt.*;
 import java.util.Random;
 
 /**
  * Created by jint on 2020/7/20.
  */
-public class Tank {
+public class Tank extends BaseTank{
     private int x;
     private int y;
     private Dir dir;
@@ -19,7 +21,7 @@ public class Tank {
     private boolean living = true;
     private Group group = Group.BAD;
     private Random random = new Random();
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     FireStrategy fireStrategy = new DefaultFireStrategy();
 

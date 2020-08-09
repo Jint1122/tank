@@ -1,11 +1,13 @@
 package com.jint.tank;
 
+import com.jint.tank.abstractfactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +15,12 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
-    List<Bullet> bullets = new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    List<Explode> explodes = new ArrayList();
+    public List<BaseBullet> bullets = new ArrayList<>();
+    public List<Tank> tanks = new ArrayList<>();
+    public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    public List<BaseExplode> explodes = new ArrayList();
+
+    public GameFactory gf = new DefaultFactory();
 
     public TankFrame() {
         setSize(800, 600);
