@@ -1,5 +1,5 @@
 #初始化坦克数量
 initTankCount=10
 #添加开火策略
-goodFS=com.jint.tank.FourDirFireStrategy
-badFS=com.jint.tank.DefaultFireStrategy
+goodFS=com.jint.tank.strategy.FourDirFireStrategy
+badFS=com.jint.tank.strategy.DefaultFireStrategy

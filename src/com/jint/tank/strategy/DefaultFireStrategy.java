@@ -1,4 +1,7 @@
-package com.jint.tank;
+package com.jint.tank.strategy;
+
+import com.jint.tank.Bullet;
+import com.jint.tank.Tank;
 
 /**
  * Created by jint on 2020/8/9.

@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by jint on 2020/7/20.
  */
-public class Bullet{
+public class Bullet extends GameObject{
     private static final int SPEED = 10;
 
     private int x;
@@ -31,7 +31,7 @@ public class Bullet{
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gm.bullets.add(this);
+        gm.add(this);
     }
 
     public Dir getDir() {
@@ -58,9 +58,10 @@ public class Bullet{
         this.gm = gm;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.bullets.remove(this);
+            gm.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -115,7 +116,7 @@ public class Bullet{
             this.die();
             int eX = tank.getX() + Tank.WIDTH /2 - Explode.WIDTH /2;
             int eY = tank.getY() + Tank.HEIGHT /2 - Explode.HEIGHT /2;
-            gm.explodes.add(new Explode(eX, eY, gm));
+            gm.add(new Explode(eX, eY, gm));
 
         }
     }

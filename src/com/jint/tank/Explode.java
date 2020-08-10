@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by jint on 2020/7/20.
  */
-public class Explode{
+public class Explode extends GameObject{
     private int x;
     private int y;
     private GameModel gm;
@@ -36,10 +36,11 @@ public class Explode{
         this.y = y;
     }
 
+    @Override
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explods[step++], x, y, null);
         if (step >= ResourceMgr.explods.length) {
-            gm.explodes.remove(this);
+            gm.remove(this);
         }
     }
 

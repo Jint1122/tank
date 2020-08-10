@@ -1,17 +1,20 @@
 package com.jint.tank;
 
+import com.jint.tank.strategy.DefaultFireStrategy;
+import com.jint.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
 /**
  * Created by jint on 2020/7/20.
  */
-public class Tank{
+public class Tank extends GameObject{
     private int x;
     private int y;
     private Dir dir;
     private boolean moving = true;
-    GameModel gm;
+    public GameModel gm;
     private static final int SPEED = 3;
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
@@ -92,10 +95,10 @@ public class Tank{
         this.group = group;
     }
 
-
+    @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.tanks.remove(this);
+            gm.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -177,5 +180,9 @@ public class Tank{
 
     public void die() {
         this.living = false;
+    }
+
+    public void stop() {
+        this.moving = false;
     }
 }
