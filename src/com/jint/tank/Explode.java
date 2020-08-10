@@ -1,13 +1,11 @@
 package com.jint.tank;
 
-import com.jint.tank.abstractfactory.BaseExplode;
-
 import java.awt.*;
 
 /**
  * Created by jint on 2020/7/20.
  */
-public class Explode extends BaseExplode {
+public class Explode{
     private int x;
     private int y;
     private TankFrame tankFrame;
@@ -38,7 +36,6 @@ public class Explode extends BaseExplode {
         this.y = y;
     }
 
-    @Override
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explods[step++], x, y, null);
         if (step >= ResourceMgr.explods.length) {

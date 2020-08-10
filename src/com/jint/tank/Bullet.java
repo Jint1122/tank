@@ -1,13 +1,11 @@
 package com.jint.tank;
 
-import com.jint.tank.abstractfactory.BaseBullet;
-
 import java.awt.*;
 
 /**
  * Created by jint on 2020/7/20.
  */
-public class Bullet extends BaseBullet {
+public class Bullet{
     private static final int SPEED = 10;
 
     private int x;
@@ -117,7 +115,7 @@ public class Bullet extends BaseBullet {
             this.die();
             int eX = tank.getX() + Tank.WIDTH /2 - Explode.WIDTH /2;
             int eY = tank.getY() + Tank.HEIGHT /2 - Explode.HEIGHT /2;
-            tf.explodes.add(tf.gf.createExplode(eX, eY, tf));
+            tf.explodes.add(new Explode(eX, eY, tf));
 
         }
     }

@@ -1,14 +1,12 @@
 package com.jint.tank;
 
-import com.jint.tank.abstractfactory.BaseTank;
-
 import java.awt.*;
 import java.util.Random;
 
 /**
  * Created by jint on 2020/7/20.
  */
-public class Tank extends BaseTank{
+public class Tank{
     private int x;
     private int y;
     private Dir dir;

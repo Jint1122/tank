@@ -1,7 +1,5 @@
 package com.jint.tank;
 
-import com.jint.tank.abstractfactory.*;
-
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,12 +13,12 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
-    public List<BaseBullet> bullets = new ArrayList<>();
+    public List<Bullet> bullets = new ArrayList<>();
     public List<Tank> tanks = new ArrayList<>();
     public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    public List<BaseExplode> explodes = new ArrayList();
+    public List<Explode> explodes = new ArrayList();
 
-    public GameFactory gf = new DefaultFactory();
+//    public GameFactory gf = new DefaultFactory();
 
     public TankFrame() {
         setSize(800, 600);
