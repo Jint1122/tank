@@ -8,15 +8,15 @@ import java.awt.*;
 public class Explode{
     private int x;
     private int y;
-    private TankFrame tankFrame;
+    private GameModel gm;
     public static final int WIDTH = ResourceMgr.explods[0].getWidth();
     public static final int HEIGHT = ResourceMgr.explods[0].getHeight();
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tankFrame) {
+    public Explode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
 //        new Audio("audio/explode.wav").loop();
     }
 
@@ -39,7 +39,7 @@ public class Explode{
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explods[step++], x, y, null);
         if (step >= ResourceMgr.explods.length) {
-            tankFrame.explodes.remove(this);
+            gm.explodes.remove(this);
         }
     }
 

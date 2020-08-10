@@ -14,24 +14,24 @@ public class Bullet{
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
     private Dir dir;
     private boolean living = true;
-    private TankFrame tf;
+    private GameModel gm;
     private Group group = Group.BAD;
 
     Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        tf.bullets.add(this);
+        gm.bullets.add(this);
     }
 
     public Dir getDir() {
@@ -50,17 +50,17 @@ public class Bullet{
         this.group = group;
     }
 
-    public TankFrame getTf() {
-        return tf;
+    public GameModel getGm() {
+        return gm;
     }
 
-    public void setTf(TankFrame tf) {
-        this.tf = tf;
+    public void setGm(GameModel gm) {
+        this.gm = gm;
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            tf.bullets.remove(this);
+            gm.bullets.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -101,7 +101,7 @@ public class Bullet{
         rect.x = this.x;
         rect.y = this.y;
 
-        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT ) {
+        if (x < 0 || y < 0 || x > GameModel.GAME_WIDTH || y > GameModel.GAME_HEIGHT ) {
             living = false;
         }
     }
@@ -115,7 +115,7 @@ public class Bullet{
             this.die();
             int eX = tank.getX() + Tank.WIDTH /2 - Explode.WIDTH /2;
             int eY = tank.getY() + Tank.HEIGHT /2 - Explode.HEIGHT /2;
-            tf.explodes.add(new Explode(eX, eY, tf));
+            gm.explodes.add(new Explode(eX, eY, gm));
 
         }
     }

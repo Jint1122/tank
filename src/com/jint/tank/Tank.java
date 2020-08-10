@@ -11,7 +11,7 @@ public class Tank{
     private int y;
     private Dir dir;
     private boolean moving = true;
-    private TankFrame tankFrame;
+    GameModel gm;
     private static final int SPEED = 3;
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
@@ -23,12 +23,12 @@ public class Tank{
 
     FireStrategy fireStrategy = new DefaultFireStrategy();
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -92,17 +92,10 @@ public class Tank{
         this.group = group;
     }
 
-    public TankFrame getTankFrame() {
-        return tankFrame;
-    }
-
-    public void setTankFrame(TankFrame tankFrame) {
-        this.tankFrame = tankFrame;
-    }
 
     public void paint(Graphics g) {
         if (!living) {
-            tankFrame.tanks.remove(this);
+            gm.tanks.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -166,11 +159,11 @@ public class Tank{
         if (this.y < 30) {
             this.y = 30;
         }
-        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH) {
-            this.x = TankFrame.GAME_WIDTH - Tank.WIDTH;
+        if (this.x > GameModel.GAME_WIDTH - Tank.WIDTH) {
+            this.x = GameModel.GAME_WIDTH - Tank.WIDTH;
         }
-        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT) {
-            this.y = TankFrame.GAME_HEIGHT - Tank.HEIGHT;
+        if (this.y > GameModel.GAME_HEIGHT - Tank.HEIGHT) {
+            this.y = GameModel.GAME_HEIGHT - Tank.HEIGHT;
         }
     }
 
