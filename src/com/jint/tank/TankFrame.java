@@ -10,8 +10,6 @@ import java.awt.event.WindowEvent;
  * Created by jint on 2020/7/19.
  */
 public class TankFrame extends Frame {
-    GameModel gm = new GameModel();
-
 //    public GameFactory gf = new DefaultFactory();
 
     public TankFrame() {
@@ -47,7 +45,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        gm.paint(g);
+        GameModel.getInstance().paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -97,7 +95,7 @@ public class TankFrame extends Frame {
                     BD = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    gm.getMainTank().fire();
+                    GameModel.getInstance().getMainTank().fire();
                     break;
                 default:
                     break;
@@ -107,7 +105,7 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            Tank myTank = gm.getMainTank();
+            Tank myTank = GameModel.getInstance().getMainTank();
             if (!BL && !BU && !BR && !BD) {
                 myTank.setMoving(false);
             } else {

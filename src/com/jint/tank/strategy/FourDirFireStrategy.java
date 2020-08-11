@@ -2,6 +2,7 @@ package com.jint.tank.strategy;
 
 import com.jint.tank.Bullet;
 import com.jint.tank.Dir;
+import com.jint.tank.GameModel;
 import com.jint.tank.Tank;
 
 /**
@@ -14,7 +15,7 @@ public class FourDirFireStrategy implements FireStrategy {
         int bY = t.getY() + Tank.HEIGHT /2 - Bullet.HEIGHT /2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            t.gm.add(new Bullet(bX, bY, dir, t.getGroup(), t.gm));
+            GameModel.getInstance().add(new Bullet(bX, bY, dir, t.getGroup()));
         }
     }
 }

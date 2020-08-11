@@ -14,7 +14,6 @@ public class Tank extends GameObject{
     private int y;
     private Dir dir;
     private boolean moving = true;
-    public GameModel gm;
     private static final int SPEED = 3;
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
@@ -27,12 +26,11 @@ public class Tank extends GameObject{
 
     FireStrategy fireStrategy = new DefaultFireStrategy();
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -54,6 +52,7 @@ public class Tank extends GameObject{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+//        GameModel.getInstance().add(this);
     }
 
     public int getX() {
@@ -99,7 +98,7 @@ public class Tank extends GameObject{
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         switch (dir) {
             case LEFT:
