@@ -23,6 +23,7 @@ public class Tank extends GameObject{
     private Group group = Group.BAD;
     private Random random = new Random();
     public Rectangle rect = new Rectangle();
+    int oldX,oldY;
 
     FireStrategy fireStrategy = new DefaultFireStrategy();
 
@@ -121,6 +122,8 @@ public class Tank extends GameObject{
     }
 
     private void move() {
+        oldX = x;
+        oldY = y;
         if (!moving) {
             return;
         }
@@ -184,5 +187,10 @@ public class Tank extends GameObject{
 
     public void stop() {
         this.moving = false;
+    }
+
+    public void back() {
+        this.x = oldX;
+        this.y = oldY;
     }
 }

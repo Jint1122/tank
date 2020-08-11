@@ -17,7 +17,7 @@ public class Bullet extends GameObject{
     private GameModel gm;
     private Group group = Group.BAD;
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
@@ -107,9 +107,9 @@ public class Bullet extends GameObject{
         }
     }
 
-    public void collideWith(Tank tank) {
+    public boolean collideWith(Tank tank) {
         if (this.group == tank.getGroup()) {
-            return;
+            return false;
         }
         if (rect.intersects(tank.rect)) {
             tank.die();
@@ -117,11 +117,12 @@ public class Bullet extends GameObject{
             int eX = tank.getX() + Tank.WIDTH /2 - Explode.WIDTH /2;
             int eY = tank.getY() + Tank.HEIGHT /2 - Explode.HEIGHT /2;
             gm.add(new Explode(eX, eY, gm));
-
+            return true;
         }
+        return false;
     }
 
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }
