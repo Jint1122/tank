@@ -1,17 +1,20 @@
 package com.jint.tank;
 
+import com.jint.tank.observer.TankFireEvent;
+import com.jint.tank.observer.TankFireHandler;
+import com.jint.tank.observer.TankFireObserver;
 import com.jint.tank.strategy.DefaultFireStrategy;
 import com.jint.tank.strategy.FireStrategy;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Created by jint on 2020/7/20.
  */
 public class Tank extends GameObject{
-    private int x;
-    private int y;
     private Dir dir;
     private boolean moving = true;
     private static final int SPEED = 3;
@@ -54,22 +57,6 @@ public class Tank extends GameObject{
         }
 
         GameModel.getInstance().add(this);
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public Dir getDir() {
@@ -119,6 +106,16 @@ public class Tank extends GameObject{
 
         }
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     private void move() {
@@ -192,5 +189,13 @@ public class Tank extends GameObject{
     public void back() {
         this.x = oldX;
         this.y = oldY;
+    }
+
+    private List<TankFireObserver> observers = Arrays.asList(new TankFireHandler());
+    public void handleFireKey() {
+        TankFireEvent e = new TankFireEvent(this);
+        for (TankFireObserver o : observers) {
+            o.actionFire(e);
+        }
     }
 }

@@ -8,8 +8,6 @@ import java.awt.*;
 public class Bullet extends GameObject{
     private static final int SPEED = 10;
 
-    private int x;
-    private int y;
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
     private Dir dir;
@@ -70,6 +68,16 @@ public class Bullet extends GameObject{
                 break;
         }
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     public void move() {

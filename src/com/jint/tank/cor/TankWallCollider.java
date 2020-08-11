@@ -2,7 +2,7 @@ package com.jint.tank.cor;
 
 import com.jint.tank.GameObject;
 import com.jint.tank.Tank;
-import com.jint.tank.strategy.Wall;
+import com.jint.tank.Wall;
 
 /**
  * Created by jint on 2020/8/10.

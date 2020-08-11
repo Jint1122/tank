@@ -1,7 +1,6 @@
 package com.jint.tank;
 
 import com.jint.tank.cor.ColliderChain;
-import com.jint.tank.strategy.Wall;
 
 import java.awt.*;
 import java.util.ArrayList;
