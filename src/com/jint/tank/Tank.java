@@ -52,7 +52,8 @@ public class Tank extends GameObject{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-//        GameModel.getInstance().add(this);
+
+        GameModel.getInstance().add(this);
     }
 
     public int getX() {
